@@ -47,7 +47,7 @@ func (self *fileHeader) output() {
 	defer output_file.Close()
 
 	bufW := bufio.NewWriter(output_file)
-	m, err := copyAndMd5(bufW, io.NewSectionReader(self.file, self.offset, self.length))
+	_, err = io.Copy(bufW, io.NewSectionReader(self.file, self.offset, self.length))
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	} else {
@@ -56,7 +56,7 @@ func (self *fileHeader) output() {
 			fmt.Fprintln(os.Stderr, err)
 			return
 		}
-		fmt.Println(m, output_file.Name())
+		fmt.Println("生成", output_file.Name())
 	}
 }
 
