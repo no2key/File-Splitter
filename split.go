@@ -39,7 +39,7 @@ func newFileHeader(file *os.File, id int, maxId int, blockSize int64, totalSize 
 }
 
 func (self *fileHeader) output() {
-	output_file, err := os.Create(fmt.Sprintf("%s.splite.%d", self.file.Name(), self.id))
+	output_file, err := os.Create(fmt.Sprintf("%s.split.%d", self.file.Name(), self.id))
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return

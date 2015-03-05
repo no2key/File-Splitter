@@ -9,7 +9,7 @@ import (
 
 func copyAndMd5(w io.Writer, r io.Reader) (string, error) {
 	h := md5.New()
-	buf := make([]byte, 10<<20)
+	buf := make([]byte, 32*1024)
 	n := 0
 	var er, ew error
 

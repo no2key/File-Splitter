@@ -22,7 +22,7 @@ func main() {
 	case "split":
 		splitMain(os.Args[2:])
 	case "combine":
-		// TODO 添加文件合并功能
+		combineMain(os.Args[2:])
 	case "md5":
 		md5Main(os.Args[2:])
 	}
