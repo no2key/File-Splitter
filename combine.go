@@ -131,16 +131,19 @@ func combineMain(args []string) {
 	sort.Sort(sliceFiles(fileFragments))
 	for i := range fileFragments {
 		if fileFragments[i].id != i {
-			fmt.Fprintln(os.Stderr, "合并文件缺失", fileFragments[i].abs, " 不是第", i, "个")
+			fmt.Fprintln(os.Stderr, "合并文件缺失",
+				fileFragments[i].abs, " 不是第", i, "个")
 			os.Exit(1)
 		}
 
 		if fileFragments[i].size != block && i != len(fileFragments)-1 {
-			fmt.Fprintln(os.Stderr, "分割文件大小不符合要求 expext:", block, "but:", fileFragments[i].size)
+			fmt.Fprintln(os.Stderr, "分割文件大小不符合要求 expext:",
+				block, "but:", fileFragments[i].size)
 			os.Exit(1)
 		}
 	}
-	fmt.Println("碎片文件校验成功……\n总大小：", float64(total)/1024.0/1024.0, "M")
+	fmt.Println("碎片文件校验成功……\n总大小：",
+		float64(total)/1024.0/1024.0, "M")
 
 	output, err := os.Create(baseName)
 	if err != nil {

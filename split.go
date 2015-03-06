@@ -20,7 +20,8 @@ type fileHeader struct {
 	file *os.File
 }
 
-func newFileHeader(file *os.File, id int, maxId int, blockSize int64, totalSize int64) *fileHeader {
+func newFileHeader(file *os.File, id int, maxId int,
+	blockSize int64, totalSize int64) *fileHeader {
 	var length int64
 
 	if id == maxId {
@@ -39,7 +40,8 @@ func newFileHeader(file *os.File, id int, maxId int, blockSize int64, totalSize 
 }
 
 func (self *fileHeader) output() {
-	output_file, err := os.Create(fmt.Sprintf("%s.split.%d", self.file.Name(), self.id))
+	output_file, err := os.Create(fmt.Sprintf("%s.split.%d",
+		self.file.Name(), self.id))
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return
@@ -47,7 +49,8 @@ func (self *fileHeader) output() {
 	defer output_file.Close()
 
 	bufW := bufio.NewWriter(output_file)
-	_, err = io.Copy(bufW, io.NewSectionReader(self.file, self.offset, self.length))
+	_, err = io.Copy(bufW, io.NewSectionReader(self.file, self.offset,
+		self.length))
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	} else {
@@ -112,7 +115,8 @@ func splitMain(args []string) {
 	for i := 0; i < maxId; i++ {
 		go func(id int) {
 			defer wg.Done()
-			newFileHeader(file, id, maxId, *flag_length, total_length).output()
+			newFileHeader(file, id, maxId, *flag_length,
+				total_length).output()
 		}(i)
 	}
 
