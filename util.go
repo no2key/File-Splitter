@@ -2,13 +2,12 @@
 package main
 
 import (
-	"crypto/md5"
 	"fmt"
+	"hash"
 	"io"
 )
 
-func copyAndMd5(w io.Writer, r io.Reader) (string, error) {
-	h := md5.New()
+func copyAndHash(w io.Writer, r io.Reader, h hash.Hash) (string, error) {
 	buf := make([]byte, 32*1024)
 	n := 0
 	var er, ew error

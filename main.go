@@ -23,8 +23,11 @@ func main() {
 		splitMain(os.Args[2:])
 	case "combine":
 		combineMain(os.Args[2:])
-	case "md5":
-		md5Main(os.Args[2:])
+	case "md5", "sha1":
+		var args []string
+		args = append(args, "-hash", os.Args[1])
+		args = append(args, os.Args[2:]...)
+		hashMain(args)
 	}
 }
 
